@@ -9,10 +9,10 @@ using System;
 public class Player : MonoBehaviour
 {
     Inputs inputs;
-    Vector2 dir = Vector2.zero;
+    Vector3 dir = Vector3.zero;
     public Rigidbody rb;
-    public float speed=5;
-    public float rotationSpeed=10;
+    public float speed=20;
+    public float rotationSpeed= 30;
 
     //Rotacion elise
     private float velocidadActual;
@@ -24,10 +24,22 @@ public class Player : MonoBehaviour
     private float velocidadPredeterminada = 10f;
 
 
-    //Dispara Bala
-    public GameObject bulletPrefab;
-    public Transform firePoint;
-    public Transform firePoint2;
+    //Barra de vida
+    public Image lifeBar;
+    float maxLife = 15;
+    float life = 14;
+    public bool alive = true;
+
+    //Panel GameOver
+    public GameObject gameOverPanel;
+
+    // Gyroscopio
+    Gyroscope gyro;
+    public Transform playerPiloto;
+    public bool gyroEnabled = true;
+    float sensivity = 50f;
+    public float x;
+    public float y;
 
     void Awake()
     {
@@ -35,6 +47,9 @@ public class Player : MonoBehaviour
         inputs.Player.Movement.performed += ctx => dir = ctx.ReadValue<Vector2>(); //si presiono algo
         inputs.Player.Movement.canceled += ctx => dir = Vector2.zero; // si no estoy presionando nada
         inputs.Player.Attack.performed += ctx => Attack();
+        inputs.Player.AttackMisil.performed += ctx => AttackMisil();
+        inputs.Player.ReloadBulls.performed += ctx => ReloadBull();
+        inputs.Player.GameOver.performed += ctx => OverGame();
     }
     void OnEnable()
     {
@@ -51,18 +66,72 @@ public class Player : MonoBehaviour
     {
         //Elise
         velocidadActual = velocidadPredeterminada;
+        //Panel danio y vida
+        gameOverPanel.SetActive(false);
+        lifeBar.fillAmount = life / maxLife; 
+        // verificamos si hay gyroscopio
+        if (SystemInfo.supportsGyroscope)
+        {
+            gyro = Input.gyro;
+            gyro.enabled = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
+    { 
+   
+         Move(); 
+         //Giroscopio();
+         ValidarBalas();
+         ValidarMisil();
+         RotacionElise(Elise);
+       
+    }
+    void Giroscopio()
     {
-        RotacionElise(Elise);
-        //rb.velocity = new Vector3(dir.x * speed, rb.velocity.y, dir.y * speed);
-        //transform.Translate(Vector3.forward * velocidadActual * Time.deltaTime);
+       if(alive)
+        {
+        rb.velocity = new Vector3(dir.x * speed, rb.velocity.y, dir.y * speed);
+         if (gyroEnabled)
+         {
+             x = Input.gyro.rotationRate.x;
+             y = Input.gyro.rotationRate.y;
+             float xFiltered = FilerGyroValue(x);
+                playerPiloto.RotateAround(transform.position,transform.right, -xFiltered * sensivity * Time.deltaTime);
+             float yFiltered = FilerGyroValue(y);
+                playerPiloto.RotateAround(playerPiloto.position,transform.up, -yFiltered * sensivity * Time.deltaTime);   
+          }
+        }
+    }
 
-        //Inclinacion Left - Right
-        transform.Rotate(Vector3.up * rotationSpeed * dir.x * Time.deltaTime);
-        
+    float FilerGyroValue(float axis)
+    {
+        if (axis < -0.1f || axis > 0.1f)
+        {
+            return axis;
+        } 
+        else
+        {
+             return 0;
+        }    
+    }
+
+
+    void Move()
+    {
+        //VELOCIDAD RECTO MOVIMIENTO
+        //transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
+        // INCLINACIÓN: Left - Right
+        transform.Rotate(Vector3.forward * rotationSpeed * dir.x * -1 * Time.deltaTime);
+        //transform.Rotate(0, 0, 1);
+
+        // INCLINACIÓN: Arriba - abajo
+        transform.Rotate(Vector3.right * rotationSpeed * dir.y * Time.deltaTime);
+
+        // DESPLAZAMIENTO MEDIO INCLINADO: Left - Right
+         //transform.Rotate(Vector3.up * rotationSpeed * dir.x * Time.deltaTime);
     }
 
     void RotacionElise(GameObject[] RotarElise)
@@ -75,11 +144,57 @@ public class Player : MonoBehaviour
         }
     }
 
-    void Attack()
+    // BALAS
+    public void Attack()
     {
-        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        Instantiate(bulletPrefab, firePoint2.position, firePoint2.rotation);
+       ControladorBulls.instance.AttackBull();
     }
+
+    public void ReloadBull()
+    {
+      ControladorBulls.instance.RecargarBalas();
+    }
+    
+    public void ValidarBalas()
+    {
+      ControladorBulls.instance.MensajeRecargarBalas();
+    }
+
+    public void TakeDamage()
+    {
+        Debug.Log("damage");
+        life--;
+        lifeBar.fillAmount = life / maxLife; 
+        if(life <=1)
+        {
+            Debug.Log("gameover");
+            StartCoroutine(ShowGameOver());
+        }
+    }
+
+    // MISIL
+    public void AttackMisil()
+    {
+       ContraladorMisil.instance.Attackmisill();
+    }
+    public void ValidarMisil()
+    {
+      ContraladorMisil.instance.MensajeRecargarMisil();
+    }
+
+    public void OverGame()
+    {
+      SceneManager.LoadScene("SampleScene");
+    }
+
+    IEnumerator ShowGameOver()
+    {
+        alive = false;
+        yield return new WaitForSeconds(1f);
+        gameOverPanel.SetActive(true);
+    }
+
+
 
 }
 

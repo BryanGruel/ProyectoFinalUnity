@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletPlayer : MonoBehaviour
+public class MisilPlayer : MonoBehaviour
 {
     public float speed = 50;
     public Rigidbody rb;
     public Vector3 direction = new Vector3(0, 0, 1); // Se va a mover hacia arriba
     public AudioClip destroySoundEffect;
     public GameObject destroyedEffect;
-
-    // Ganaste ganaste;
-    // Player player;
-    // SpawnerMeteoro spawnerMeteoro;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +22,7 @@ public class BulletPlayer : MonoBehaviour
       transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
+
     void OnCollisionEnter(Collision collision)
     {
       if(collision.gameObject.CompareTag("Enemy"))
@@ -38,7 +35,7 @@ public class BulletPlayer : MonoBehaviour
       else if(collision.gameObject.CompareTag("BarcoEnemy"))
       {
          BarcoEnemy barcoEnemy = collision.gameObject.GetComponent<BarcoEnemy>();
-         barcoEnemy.TakeDamageBala();
+         barcoEnemy.TakeDamageMisil();
          AudioManager.instance.PlaySFX(destroySoundEffect);
          Instantiate(destroyedEffect, transform.position, destroyedEffect.transform.rotation);
          Destroy(gameObject);
@@ -49,5 +46,4 @@ public class BulletPlayer : MonoBehaviour
       }
 
     }
-
 }

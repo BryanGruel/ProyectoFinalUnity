@@ -44,6 +44,33 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ReloadBulls"",
+                    ""type"": ""Button"",
+                    ""id"": ""209dbf9b-eea1-4902-92f2-e354ff0b2e32"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GameOver"",
+                    ""type"": ""Button"",
+                    ""id"": ""ae8f6bb3-ae6a-4272-a8c4-7a79d5a30c1b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AttackMisil"",
+                    ""type"": ""Button"",
+                    ""id"": ""eb9e0e85-7af0-46ae-8f6c-d57bad4d76bd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -189,6 +216,39 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f6698be0-cc61-4d7e-adea-88a9b035d8dd"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReloadBulls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b97ff96-b4db-4124-9e2e-05172b648f72"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GameOver"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""328aff4b-2972-43d9-8472-5282a1c4ac33"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackMisil"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -199,6 +259,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_ReloadBulls = m_Player.FindAction("ReloadBulls", throwIfNotFound: true);
+        m_Player_GameOver = m_Player.FindAction("GameOver", throwIfNotFound: true);
+        m_Player_AttackMisil = m_Player.FindAction("AttackMisil", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -260,12 +323,18 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_ReloadBulls;
+    private readonly InputAction m_Player_GameOver;
+    private readonly InputAction m_Player_AttackMisil;
     public struct PlayerActions
     {
         private @Inputs m_Wrapper;
         public PlayerActions(@Inputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @ReloadBulls => m_Wrapper.m_Player_ReloadBulls;
+        public InputAction @GameOver => m_Wrapper.m_Player_GameOver;
+        public InputAction @AttackMisil => m_Wrapper.m_Player_AttackMisil;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -281,6 +350,15 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
+                @ReloadBulls.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReloadBulls;
+                @ReloadBulls.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReloadBulls;
+                @ReloadBulls.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReloadBulls;
+                @GameOver.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGameOver;
+                @GameOver.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGameOver;
+                @GameOver.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGameOver;
+                @AttackMisil.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackMisil;
+                @AttackMisil.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackMisil;
+                @AttackMisil.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackMisil;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -291,6 +369,15 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @ReloadBulls.started += instance.OnReloadBulls;
+                @ReloadBulls.performed += instance.OnReloadBulls;
+                @ReloadBulls.canceled += instance.OnReloadBulls;
+                @GameOver.started += instance.OnGameOver;
+                @GameOver.performed += instance.OnGameOver;
+                @GameOver.canceled += instance.OnGameOver;
+                @AttackMisil.started += instance.OnAttackMisil;
+                @AttackMisil.performed += instance.OnAttackMisil;
+                @AttackMisil.canceled += instance.OnAttackMisil;
             }
         }
     }
@@ -299,5 +386,8 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnReloadBulls(InputAction.CallbackContext context);
+        void OnGameOver(InputAction.CallbackContext context);
+        void OnAttackMisil(InputAction.CallbackContext context);
     }
 }
