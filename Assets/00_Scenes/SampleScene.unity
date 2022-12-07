@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.39622465, g: 0.43436074, b: 0.4992919, a: 1}
+  m_IndirectSpecularColor: {r: 0.39589646, g: 0.4341852, b: 0.4992023, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4254,6 +4254,7 @@ GameObject:
   - component: {fileID: 1834494246}
   - component: {fileID: 1834494245}
   - component: {fileID: 1834494244}
+  - component: {fileID: 1834494248}
   m_Layer: 0
   m_Name: Agua
   m_TagString: Untagged
@@ -4332,13 +4333,33 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1834494243}
   m_LocalRotation: {x: -0, y: 0.7197067, z: -0, w: 0.6942782}
-  m_LocalPosition: {x: -99, y: 0, z: 1143}
+  m_LocalPosition: {x: -441, y: 0, z: 1143}
   m_LocalScale: {x: 3000, y: 0.59338, z: 3000}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 92.061, z: 0}
+--- !u!95 &1834494248
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834494243}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b0cda47948419514d97be9c1efd056c1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &1893403924 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7463123662269585229, guid: 2948c70e80a239846be2c80ec5174c01, type: 3}
