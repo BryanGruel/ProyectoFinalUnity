@@ -29,7 +29,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6805621848954614139}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &382196698
 GameObject:
@@ -61,9 +61,10 @@ Transform:
   m_LocalPosition: {x: 0.009, y: 0.24506868, z: -0.838}
   m_LocalScale: {x: 0.37075484, y: 0.37075484, z: 0.37075484}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 511166805}
   m_Father: {fileID: 6805621848954614139}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &382196701
 MeshFilter:
@@ -156,12 +157,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511166802}
   m_LocalRotation: {x: 0.013227382, y: -0.020493425, z: -0.0012925379, w: 0.9997017}
-  m_LocalPosition: {x: 0.23, y: 2.12, z: -7.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.59608656, y: 5.0570664, z: -16.889864}
+  m_LocalScale: {x: 2.6972, y: 2.6971998, z: 2.6972}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6805621848954614139}
-  m_RootOrder: 2
+  m_Father: {fileID: 382196702}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 1.512, y: -2.351, z: -0.179}
 --- !u!20 &511166804
 Camera:
@@ -277,7 +278,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6805621848954614139}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &28734065675204299
 GameObject:
@@ -308,7 +309,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6805621848954614139}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &907525670699941121
 GameObject:
@@ -511,7 +512,6 @@ Transform:
   m_Children:
   - {fileID: 3512902274447766713}
   - {fileID: 6812996122260955108}
-  - {fileID: 511166805}
   - {fileID: 320924278}
   - {fileID: 1024323821}
   - {fileID: 382196702}
@@ -539,7 +539,7 @@ MonoBehaviour:
   lifeBar: {fileID: 0}
   alive: 1
   gameOverPanel: {fileID: 0}
-  player: {fileID: 6805621848954614139}
+  playerPiloto: {fileID: 0}
   gyroEnabled: 1
   x: 0
   y: 0

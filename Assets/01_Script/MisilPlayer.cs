@@ -19,6 +19,7 @@ public class MisilPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      transform.LookAt(ContraladorMisil.instance.ObjetivoEnemy.position);
       transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 

@@ -80,9 +80,10 @@ public class ContraladorMisil : MonoBehaviour
 
     void BuscarEnemy()
     {
-        Vector3 dir = ObjetivoEnemy.position - transform.position;
-        float angleY = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg - 0; //Para que rote al momento de buscarlo
-        transform.rotation = Quaternion.Euler(0, angleY , 0);
+        // Vector3 dir = ObjetivoEnemy.position - transform.position;
+        // float angleY = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg - 0; //Para que rote al momento de buscarlo
+        // transform.rotation = Quaternion.Euler(0, angleY , 0);
+        transform.LookAt(ObjetivoEnemy.position);
     }
 
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.39589646, g: 0.4341852, b: 0.4992023, a: 1}
+  m_IndirectSpecularColor: {r: 0.39622465, g: 0.43436074, b: 0.4992919, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1849,7 +1849,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -1908,7 +1908,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: -16.2, y: 30.1, z: 28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2316,7 +2316,7 @@ MonoBehaviour:
   MisilPrefab: {fileID: 132654, guid: 3db888a07c8c1ae42b3ff9ff707231d0, type: 3}
   firePoint: {fileID: 1983542617}
   SoundEffect: {fileID: 8300000, guid: 70d6e167069db844a8e86e3f79f002b5, type: 3}
-  ObjetivoEnemy: {fileID: 0}
+  ObjetivoEnemy: {fileID: 2034727856}
 --- !u!1 &915153565
 GameObject:
   m_ObjectHideFlags: 0
@@ -2445,6 +2445,46 @@ Transform:
   m_Father: {fileID: 1106047042}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &942964088 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 382196698, guid: b3153dc28bdb00f40aec34c24f96c7ec, type: 3}
+  m_PrefabInstance: {fileID: 2079797083}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &942964089
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942964088}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &942964090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942964088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb155d5eb6df4044b8a3698f21d6ae7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPiloto: {fileID: 325790593}
+  gyroEnabled: 1
+  x: 0
+  y: 0
+  speed: 20
+  rb: {fileID: 942964089}
+  alive: 1
 --- !u!1 &966519386
 GameObject:
   m_ObjectHideFlags: 0
@@ -4753,15 +4793,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 511166805, guid: b3153dc28bdb00f40aec34c24f96c7ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 511166805, guid: b3153dc28bdb00f40aec34c24f96c7ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.78
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 511166805, guid: b3153dc28bdb00f40aec34c24f96c7ec, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.4
+      value: -2.22
       objectReference: {fileID: 0}
     - target: {fileID: 2079797085, guid: b3153dc28bdb00f40aec34c24f96c7ec, type: 3}
       propertyPath: m_Enabled
