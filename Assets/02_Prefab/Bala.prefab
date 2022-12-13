@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 282aa2c4cf92d7d438faf9dda84cad72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 130
   rb: {fileID: 5602162173117921938}
   direction: {x: 0, y: 0, z: 1}
   destroySoundEffect: {fileID: 8300000, guid: afc222dca8a156e4183e239cfa5d4a3a, type: 3}

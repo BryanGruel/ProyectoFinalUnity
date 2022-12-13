@@ -15,6 +15,10 @@ public class BarcoEnemy : MonoBehaviour
 
     public GameObject WinGamePanel;
 
+    //Animacion Danio Barco
+    public GameObject DanioEffect;
+    public Transform firePoint;
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +47,12 @@ public class BarcoEnemy : MonoBehaviour
     {
         life--;
         lifeBar.fillAmount = life / maxLife; 
+        if(life <=5)
+        {
+           //Animacion
+           Instantiate(DanioEffect, firePoint.position, firePoint.rotation);
+
+        }
         if(life <=1)
         {
             StartCoroutine(ShowWinGame());

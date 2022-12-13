@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using Random=UnityEngine.Random;
 
 
 public class ContraladorMisil : MonoBehaviour
@@ -19,9 +20,10 @@ public class ContraladorMisil : MonoBehaviour
     public AudioClip SoundEffect;
 
     //Seguir Misil Enemy
-    public Transform ObjetivoEnemy;
+    //public Transform ObjetivoEnemy;
+     //public List<Transform> items;
 
-
+    
     
     void Awake()
     {
@@ -36,7 +38,7 @@ public class ContraladorMisil : MonoBehaviour
     void Start()
     {
       MisilTxt.text = "Missils: " + misil.ToString();
-       BuscarEnemy();
+      //BuscarEnemy();
     }
 
     // Update is called once per frame
@@ -78,12 +80,16 @@ public class ContraladorMisil : MonoBehaviour
         }
     }
 
-    void BuscarEnemy()
-    {
-        // Vector3 dir = ObjetivoEnemy.position - transform.position;
-        // float angleY = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg - 0; //Para que rote al momento de buscarlo
-        // transform.rotation = Quaternion.Euler(0, angleY , 0);
-        transform.LookAt(ObjetivoEnemy.position);
-    }
+    // public void BuscarEnemy()
+    // {
+    //     //Vector3 dir = ObjetivoEnemy.position - transform.position;
+    //     //float angleY = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg - 0; //Para que rote al momento de buscarlo
+    //     //transform.rotation = Quaternion.Euler(0, angleY , 0);
+
+    //    // var aleatorio = (items[Random.Range(0, items.Count)]);
+    //     transform.LookAt(ObjetivoEnemy.position);
+        
+      
+    // }
 
 }

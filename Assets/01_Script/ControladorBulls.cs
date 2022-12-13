@@ -20,6 +20,8 @@ public class ControladorBulls : MonoBehaviour
     public AudioClip SoundEffect;
     public AudioClip SoundEffectReloadBull;
 
+    public GameObject DisparoEffect;
+
 
     void Awake()
     {
@@ -47,6 +49,9 @@ public class ControladorBulls : MonoBehaviour
         {
              Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
              Instantiate(bulletPrefab, firePoint2.position, firePoint2.rotation);
+
+             Instantiate(DisparoEffect, firePoint.position, firePoint.transform.rotation);
+             Instantiate(DisparoEffect, firePoint2.position, firePoint2.transform.rotation);
              AudioManager.instance.PlaySFX(SoundEffect);
              ConteoBalas();
         }

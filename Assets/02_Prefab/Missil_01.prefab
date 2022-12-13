@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2399412}
   - component: {fileID: -502541802757627417}
   - component: {fileID: 1481870142703745278}
-  - component: {fileID: 494160536894480002}
+  - component: {fileID: 6860431379679727693}
   m_Layer: 0
   m_Name: Missil_01
   m_TagString: Untagged
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73142a0767141d742857376205f83a8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 130
   rb: {fileID: 1481870142703745278}
   direction: {x: 0, y: 0, z: 1}
   destroySoundEffect: {fileID: 8300000, guid: d2a2b3d5072cd1146933f4b15fb65f11, type: 3}
@@ -121,8 +121,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &494160536894480002
-CapsuleCollider:
+--- !u!65 &6860431379679727693
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -131,10 +131,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.8612257
-  m_Height: 3.586179
-  m_Direction: 1
-  m_Center: {x: 0.7997742, y: -0.7023351, z: -0.41586936}
+  serializedVersion: 2
+  m_Size: {x: 0.5880439, y: 0.50419897, z: 2.6013148}
+  m_Center: {x: -0.009394612, y: 0.07720769, z: -0.6414376}
 --- !u!1 &937995195261801904
 GameObject:
   m_ObjectHideFlags: 0

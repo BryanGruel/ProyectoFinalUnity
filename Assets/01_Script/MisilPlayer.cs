@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class MisilPlayer : MonoBehaviour
 {
-    public float speed = 50;
+    public float speed = 130;
     public Rigidbody rb;
     public Vector3 direction = new Vector3(0, 0, 1); // Se va a mover hacia arriba
     public AudioClip destroySoundEffect;
     public GameObject destroyedEffect;
+    public Transform target = null;
 
     // Start is called before the first frame update
     void Start()
     {
-    
+     target = DetectorEnemy.instance.ObjetivoEnemy;
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() 
     {
-      transform.LookAt(ContraladorMisil.instance.ObjetivoEnemy.position);
+      if(target != null)
+      {
+         transform.LookAt(target.position);
+      }
       transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
@@ -30,6 +34,7 @@ public class MisilPlayer : MonoBehaviour
       {
          AudioManager.instance.PlaySFX(destroySoundEffect);
          Instantiate(destroyedEffect, transform.position, destroyedEffect.transform.rotation);
+         ControladorPuntos.instance.AddPoints();
          Destroy(gameObject);
          Destroy(collision.gameObject);    
       }
@@ -42,6 +47,10 @@ public class MisilPlayer : MonoBehaviour
          Destroy(gameObject);
       }
       else if(collision.gameObject.CompareTag("BarcoPlayer"))
+      {
+         Destroy(gameObject);
+      }
+      else if(collision.gameObject.CompareTag("Pared"))
       {
          Destroy(gameObject);
       }

@@ -32,14 +32,9 @@ public class Player : MonoBehaviour
 
     //Panel GameOver
     public GameObject gameOverPanel;
+    public GameObject DanioEffect;
+    public Transform firePoint;
 
-    // Gyroscopio
-    Gyroscope gyro;
-    public Transform playerPiloto;
-    public bool gyroEnabled = true;
-    float sensivity = 50f;
-    public float x;
-    public float y;
 
     void Awake()
     {
@@ -69,12 +64,7 @@ public class Player : MonoBehaviour
         //Panel danio y vida
         gameOverPanel.SetActive(false);
         lifeBar.fillAmount = life / maxLife; 
-        // verificamos si hay gyroscopio
-        if (SystemInfo.supportsGyroscope)
-        {
-            gyro = Input.gyro;
-            gyro.enabled = true;
-        }
+       
     }
 
     // Update is called once per frame
@@ -82,49 +72,20 @@ public class Player : MonoBehaviour
     { 
    
          Move(); 
-         //Giroscopio();
          ValidarBalas();
          ValidarMisil();
          RotacionElise(Elise);
        
     }
-    void Giroscopio()
-    {
-       if(alive)
-        {
-        rb.velocity = new Vector3(dir.x * speed, rb.velocity.y, dir.y * speed);
-         if (gyroEnabled)
-         {
-             x = Input.gyro.rotationRate.x;
-             y = Input.gyro.rotationRate.y;
-             float xFiltered = FilerGyroValue(x);
-                playerPiloto.RotateAround(transform.position,transform.right, -xFiltered * sensivity * Time.deltaTime);
-             float yFiltered = FilerGyroValue(y);
-                playerPiloto.RotateAround(playerPiloto.position,transform.up, -yFiltered * sensivity * Time.deltaTime);   
-          }
-        }
-    }
-
-    float FilerGyroValue(float axis)
-    {
-        if (axis < -0.1f || axis > 0.1f)
-        {
-            return axis;
-        } 
-        else
-        {
-             return 0;
-        }    
-    }
-
 
     void Move()
     {
         //VELOCIDAD RECTO MOVIMIENTO
-        //transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
         // INCLINACIÓN: Left - Right
         transform.Rotate(Vector3.forward * rotationSpeed * dir.x * -1 * Time.deltaTime);
+
         //transform.Rotate(0, 0, 1);
 
         // INCLINACIÓN: Arriba - abajo
@@ -162,9 +123,14 @@ public class Player : MonoBehaviour
 
     public void TakeDamage()
     {
-        Debug.Log("damage");
-        life--;
+        life = life - 2;
         lifeBar.fillAmount = life / maxLife; 
+        if(life <=6)
+        {
+           //Animacion
+           Instantiate(DanioEffect, firePoint.position, firePoint.rotation);
+
+        }
         if(life <=1)
         {
             Debug.Log("gameover");
@@ -187,14 +153,13 @@ public class Player : MonoBehaviour
       SceneManager.LoadScene("SampleScene");
     }
 
+
     IEnumerator ShowGameOver()
     {
         alive = false;
         yield return new WaitForSeconds(1f);
         gameOverPanel.SetActive(true);
     }
-
-
 
 }
 

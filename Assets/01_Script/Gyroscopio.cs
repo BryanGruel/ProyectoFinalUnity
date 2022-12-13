@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gyroscopio : MonoBehaviour
 {
-      // Gyroscopio
+    // Gyroscopio
     Gyroscope gyro;
     public Transform playerPiloto;
     public bool gyroEnabled = true;

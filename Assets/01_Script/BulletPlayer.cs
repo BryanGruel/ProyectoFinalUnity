@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletPlayer : MonoBehaviour
 {
-    public float speed = 50;
+    public float speed = 130;
     public Rigidbody rb;
     public Vector3 direction = new Vector3(0, 0, 1); // Se va a mover hacia arriba
     public AudioClip destroySoundEffect;
@@ -44,6 +44,10 @@ public class BulletPlayer : MonoBehaviour
          Destroy(gameObject);
       }
       else if(collision.gameObject.CompareTag("BarcoPlayer"))
+      {
+         Destroy(gameObject);
+      }
+      else if(collision.gameObject.CompareTag("Pared"))
       {
          Destroy(gameObject);
       }
