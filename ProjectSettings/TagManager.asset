@@ -8,6 +8,7 @@ TagManager:
   - BarcoPlayer
   - BarcoEnemy
   - Pared
+  - Agua
   layers:
   - Default
   - TransparentFX
